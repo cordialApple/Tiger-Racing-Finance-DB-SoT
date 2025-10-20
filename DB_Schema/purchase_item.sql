@@ -1,0 +1,23 @@
+create table public.purchase_item (
+  id uuid not null,
+  requester uuid not null,
+  part_url character varying null,
+  part_name text null,
+  manufacturer_pt_no bigint null,
+  unit_price double precision null,
+  quantity bigint null,
+  supplier text null,
+  status public.purchase_status null,
+  notes text null,
+  created_at timestamp without time zone null,
+  needed_by date null,
+  po_no character varying null default '"TR26-"'::character varying,
+  order_date date null,
+  order_received_date date null,
+  order_active_status date null,
+  request_id uuid not null,
+  subtotal numeric GENERATED ALWAYS as ((unit_price * (quantity)::double precision)) STORED null,
+  approvals boolean[] null,
+  constraint purchase_request_pkey primary key (id),
+  constraint purchase_request_requester_fkey foreign KEY (requester) references users (id)
+) TABLESPACE pg_default;
