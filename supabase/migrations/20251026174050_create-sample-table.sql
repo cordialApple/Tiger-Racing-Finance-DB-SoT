@@ -1,4 +1,4 @@
--- Create a sample table for testing
+-- Create a sample table for test
 create table if not exists public.sample_table (
   id uuid not null default gen_random_uuid(),
   name text not null,
